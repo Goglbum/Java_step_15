@@ -96,16 +96,14 @@ public class IssueManagerNotFoundTest {
     @Test
     public void filterByOpenAuthorAndComparator() {
         NewIssueComparator comparator = new NewIssueComparator();
-        IssuePredicates predicates = new IssuePredicates();
-        List<Issue> actual = manager.filterByOpen(predicates.filterAuthor("author2"), comparator);
+        List<Issue> actual = manager.filterAuthorByOpen("author2", comparator);
         List<Issue> expected = new ArrayList<>();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void filterByOpenLabel() {
-        IssuePredicates predicates = new IssuePredicates();
-        List<Issue> actual = manager.filterByOpen(predicates.filterLabel("Kotlin"));
+    public void filterByOpenAuthor() {
+        List<Issue> actual = manager.filterAuthorByOpen("author2");
         List<Issue> expected = new ArrayList<>();
         assertEquals(expected, actual);
     }
@@ -113,16 +111,14 @@ public class IssueManagerNotFoundTest {
     @Test
     public void filterByCloseAssigneeAndComparator() {
         NewIssueComparator comparator = new NewIssueComparator();
-        IssuePredicates predicates = new IssuePredicates();
-        List<Issue> actual = manager.filterByClose(predicates.filterAssignee("assigne4"), comparator);
+        List<Issue> actual = manager.filterAssigneeByClose("assigne4", comparator);
         List<Issue> expected = new ArrayList<>();
         assertEquals(expected, actual);
     }
 
     @Test
     public void filterByCloseAssignee() {
-        IssuePredicates predicates = new IssuePredicates();
-        List<Issue> actual = manager.filterByClose(predicates.filterAssignee("assigne4"));
+        List<Issue> actual = manager.filterAssigneeByClose("assigne4");
         List<Issue> expected = new ArrayList<>();
         assertEquals(expected, actual);
     }

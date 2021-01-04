@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +15,7 @@ import java.util.Collection;
 public class Issue implements Comparable<Issue> {
     private int id;
     private String author;
-    private String label;
+    private List<String> label;
     private String project;
     private String milestones;
     private String assignee;

@@ -12,14 +12,10 @@ public class IssuePredicates {
     }
 
     public static Predicate<Issue> filterLabel(String label) {
-        return p -> p.getLabel().equalsIgnoreCase(label);
+        return p -> p.getLabel().contains(label);
     }
 
     public static Predicate<Issue> filterAssignee(String assignee) {
         return p -> p.getAssignee().equalsIgnoreCase(assignee);
-    }
-
-    public static List<Issue> filterIssues(List<Issue> issues, Predicate<Issue> predicate) {
-        return issues.stream().filter(predicate).collect(Collectors.<Issue>toList());
     }
 }

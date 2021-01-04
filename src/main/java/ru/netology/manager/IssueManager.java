@@ -5,14 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.domain.Issue;
 import ru.netology.exception.NotFoundException;
+import ru.netology.predicates.IssuePredicates;
 import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-import static ru.netology.predicates.IssuePredicates.filterIssues;
 
 @Data
 @AllArgsConstructor
@@ -67,25 +68,83 @@ public class IssueManager {
         return result;
     }
 
-    public List<Issue> filterByOpen(Predicate<Issue> predicate, Comparator<Issue> comparator) {
+    public static List<Issue> filterIssues(List<Issue> issues, Predicate<Issue> predicate) {
+        return issues.stream().filter(predicate).collect(Collectors.<Issue>toList());
+    }
+
+    public List<Issue> filterAuthorByOpen(String author, Comparator<Issue> comparator) {
         List<Issue> issues = findAllOpen(comparator);
-        return filterIssues(issues, predicate);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAuthor(author));
     }
 
-    public List<Issue> filterByOpen(Predicate<Issue> predicate) {
+    public List<Issue> filterAuthorByOpen(String author) {
         List<Issue> issues = findAllOpen();
-        return filterIssues(issues, predicate);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAuthor(author));
     }
 
-    public List<Issue> filterByClose(Predicate<Issue> predicate, Comparator<Issue> comparator) {
+    public List<Issue> filterLabelByOpen(String author, Comparator<Issue> comparator) {
+        List<Issue> issues = findAllOpen(comparator);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterLabel(author));
+    }
+
+    public List<Issue> filterLabelByOpen(String label) {
+        List<Issue> issues = findAllOpen();
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterLabel(label));
+    }
+
+    public List<Issue> filterAssigneeByOpen(String assignee, Comparator<Issue> comparator) {
+        List<Issue> issues = findAllOpen(comparator);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAssignee(assignee));
+    }
+
+    public List<Issue> filterAssigneeByOpen(String assignee) {
+        List<Issue> issues = findAllOpen();
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAssignee(assignee));
+    }
+
+    public List<Issue> filterAuthorByClose(String author, Comparator<Issue> comparator) {
         List<Issue> issues = findAllClose(comparator);
-        return filterIssues(issues, predicate);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAuthor(author));
     }
 
-    public List<Issue> filterByClose(Predicate<Issue> predicate) {
+    public List<Issue> filterAuthorByClose(String author) {
         List<Issue> issues = findAllClose();
-        return filterIssues(issues, predicate);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAuthor(author));
     }
+
+    public List<Issue> filterLabelByClose(String author, Comparator<Issue> comparator) {
+        List<Issue> issues = findAllClose(comparator);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterLabel(author));
+    }
+
+    public List<Issue> filterLabelByClose(String label) {
+        List<Issue> issues = findAllClose();
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterLabel(label));
+    }
+
+    public List<Issue> filterAssigneeByClose(String assignee, Comparator<Issue> comparator) {
+        List<Issue> issues = findAllClose(comparator);
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAssignee(assignee));
+    }
+
+    public List<Issue> filterAssigneeByClose(String assignee) {
+        List<Issue> issues = findAllClose();
+        IssuePredicates predicates = new IssuePredicates();
+        return filterIssues(issues, predicates.filterAssignee(assignee));
+    }
+
+
 
     public void closeById(int id) {
         for (Issue issue : findAllOpen()) {
