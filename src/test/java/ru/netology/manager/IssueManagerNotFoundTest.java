@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.comparator.*;
 import ru.netology.domain.Issue;
-import ru.netology.predicates.IssuePredicates;
 import ru.netology.repository.IssueRepository;
 
 import java.util.ArrayList;

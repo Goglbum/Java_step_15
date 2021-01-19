@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class IssueManager {
     private IssueRepository repository;
 
-    public void add(Issue issue) { repository.save(issue);}
+    public void add(Issue issue) {repository.save(issue);}
 
     public List<Issue> findAllOpen(Comparator<Issue> comparator) {
         List<Issue> result = new ArrayList<>();
@@ -144,16 +144,14 @@ public class IssueManager {
         return filterIssues(issues, predicates.filterAssignee(assignee));
     }
 
-
-
-    public void closeById(int id) {
+    public void closeByTag(int tag) {
         for (Issue issue : findAllOpen()) {
-            if (issue.getId() == id) {
+            if (issue.getTag() == tag) {
                 issue.setOpen(false);
                 return;
             }
         }
-        throw new NotFoundException("Element with id: " + id + " not found");
+        throw new NotFoundException("Element with tag: " + tag + " not found");
     }
 
 }

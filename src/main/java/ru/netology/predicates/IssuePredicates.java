@@ -2,9 +2,8 @@ package ru.netology.predicates;
 
 import ru.netology.domain.Issue;
 
-import java.util.List;
+
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class IssuePredicates {
     public Predicate<Issue> filterAuthor(String author) {
